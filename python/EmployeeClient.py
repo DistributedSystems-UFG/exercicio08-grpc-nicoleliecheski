@@ -31,6 +31,18 @@ def run():
         response = stub.ListAllEmployees(EmployeeService_pb2.EmptyMessage())
         print ('All employees: ' + str(response))
 
+        # atualizar o nome do funcionario
+        response = stub.UpdateEmployeeName(EmployeeService_pb2.EmployeeNameUpdate(id=101, name='Saravanan Kumar'))
+        print ('Updated employee name ' + response.status)
+
+        # get todos os funcionarios com um certo cargo
+        response = stub.GetEmployeesByTitle(EmployeeService_pb2.EmployeeTitleFilter(title='Technical Leader'))
+        print ('Employees with title Technical Leader: ' + str(response))
+
+        # get o total de funcionarios
+        response = stub.GetEmployeeCount(EmployeeService_pb2.EmptyMessage())
+        print ('Total employees: ' + str(response.count))
+
 if __name__ == '__main__':
     logging.basicConfig()
     run()
